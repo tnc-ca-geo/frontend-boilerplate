@@ -12,11 +12,11 @@
   "author": "Nathaniel Rindlaub",
   "license": "ISC",
   "devDependencies": {
-    "@dojo/shim": "2.0.0",
     "@arcgis/webpack-plugin": "^4.10.5",
     "@babel/core": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
     "@babel/preset-react": "^7.0.0-beta.46",
+    "@dojo/shim": "2.0.0",
     "@types/arcgis-js-api": "^4.10.0",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
@@ -24,6 +24,7 @@
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
     "cache-loader": "^1.2.2",
     "calcite-web": "github:Esri/calcite-web#v1.2.4",
+    "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^0.28.11",
     "del-cli": "^1.1.0",
     "file-loader": "^1.1.11",
@@ -38,7 +39,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "clean-webpack-plugin": "^1.0.1",
+    "@babel/polyfill": "^7.2.5",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"
   }

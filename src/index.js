@@ -1,4 +1,4 @@
-// import "@dojo/shim/Promise";
+import "@babel/polyfill";
 import "./config";
 
 import FeatureLayer from "esri/layers/FeatureLayer";
