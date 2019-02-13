@@ -1,6 +1,17 @@
 # Frontend boilerplate for map-based web apps
 
-Integrates React, Redux, ESRI JS API
+For bootstrapping apps with:
+- React as framework
+- Redux for state management
+- ESRI JS API for mapping
+- D3 for charts and visualizations
+
+## Integration details
+
+The boilerplate leverages Redux middleware to encapsulate all interactions with the ESRI JS API. Here's a [blog post](https://www.esri.com/arcgis-blog/products/3d-gis/3d-gis/react-redux-building-modern-web-apps-with-the-arcgis-js-api/) and [sample app](https://github.com/Esri/react-redux-js4) that describes that approach.
+
+
+# Getting started
 
 ## install dependencies
 ```
@@ -11,7 +22,6 @@ npm install
 ```
 npm start
 ```
-
 
 ## generate a build
 ```
