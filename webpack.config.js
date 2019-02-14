@@ -2,9 +2,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ArcGISPlugin = require('@arcgis/webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const path = require('path');
 const webpack = require('webpack');
+
 
 module.exports = {
   entry: {
@@ -14,7 +16,15 @@ module.exports = {
     filename: '[name].bundle.js',
     publicPath: ''
   },
-
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false
+      })
+    ]
+  },
   module: {
     rules: [
       {
@@ -49,9 +59,11 @@ module.exports = {
         use: [
           'cache-loader',
           {
-            loader: 'file-loader',
+            // NOTE: original config used file-loader for fonts, but it wasn't
+            // working. Reverted to url-loader
+            loader: 'url-loader',
             options: {
-              name: 'build/[name].[ext]'
+              limit: 10 * 1024,
             }
           }
         ]
@@ -64,6 +76,7 @@ module.exports = {
   },
 
   plugins: [
+
     new CleanWebpackPlugin(['dist']),
 
     new ArcGISPlugin({
@@ -71,8 +84,9 @@ module.exports = {
     }),
 
     new HtmlWebPackPlugin({
-      title: 'My ArcGIS Webpack App',
+      title: 'Boilerplate',
       chunksSortMode: 'none',
+      favicon: './src/assets/favicon.ico',
       meta: {
         viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       }
