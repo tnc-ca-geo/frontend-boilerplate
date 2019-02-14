@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducers'
 import { routerMiddleware } from 'connected-react-router/immutable'
 import loggerMiddleware from './middleware/logger'
+import arcgisMiddleWare from './middleware/arcgis-mapview'
 import history from './history'
 
 
@@ -17,6 +18,7 @@ const configureStore = (preloadedState) => {
         routerMiddleware(history),
         thunkMiddleware,
         loggerMiddleware,
+        arcgisMiddleWare
       )
     ),
   )
