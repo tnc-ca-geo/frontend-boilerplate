@@ -6,9 +6,13 @@ import Map from '../containers/Map'
 
 
 const Streams = () => (
-  <Container>
+  <Container fluid='true'>
     <Row>
-      <Map />
+      <Col>
+        <div className="map-wrapper">
+          <Map />
+        </div>
+      </Col>
     </Row>
   </Container>
 )

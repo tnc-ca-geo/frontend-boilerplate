@@ -51,7 +51,7 @@ const arcgisMiddleWare = store => next => (action) => {
 
       // Initialize Map
       // const webScene = new WebScene({ portalItem: { id: action.id } });
-      const map = new Map({ basemap: 'topo-vector'})
+      const map = new Map({ basemap: 'topo'})
       arcgis.mapView.map = map
 
       // When initialized...
