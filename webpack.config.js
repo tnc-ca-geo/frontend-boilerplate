@@ -12,10 +12,12 @@ module.exports = {
   entry: {
     index: './src/index.js'
   },
+
   output: {
     filename: '[name].bundle.js',
-    publicPath: ''
+    publicPath: '/'
   },
+
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -25,6 +27,7 @@ module.exports = {
       })
     ]
   },
+
   module: {
     rules: [
       {
@@ -69,10 +72,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ['cache-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       }
     ]
+  },
+
+  devServer: {
+    historyApiFallback: true,
   },
 
   plugins: [
@@ -85,11 +92,11 @@ module.exports = {
 
     new HtmlWebPackPlugin({
       title: 'Boilerplate',
+      template: './src/index.html',
+      filename: './index.html',
       chunksSortMode: 'none',
       favicon: './src/assets/favicon.ico',
-      meta: {
-        viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
-      }
+      inlineSource: '.(css)$',
     }),
 
     new MiniCssExtractPlugin({
