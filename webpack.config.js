@@ -60,20 +60,18 @@ module.exports = {
       {
         test: /\.(wsv|ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         use: [
-          'cache-loader',
+          // 'cache-loader',  // Causing problems with fonts
           {
-            // NOTE: original config used file-loader for fonts, but it wasn't
-            // working. Reverted to url-loader
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
-              limit: 10 * 1024,
+              name: 'build/[name].[ext]'
             }
           }
         ]
       },
       {
         test: /\.(scss|css)$/,
-        use: ['cache-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       }
     ]
   },
