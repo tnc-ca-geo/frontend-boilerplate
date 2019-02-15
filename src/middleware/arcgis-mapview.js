@@ -2,7 +2,6 @@ import { mapDefaults } from '../config/map'
 import Map from 'esri/Map'
 import MapView from 'esri/views/MapView'
 
-
 import {
   INIT_MAP,
 } from '../actions/map'
@@ -46,9 +45,11 @@ const arcgisMiddleWare = store => next => (action) => {
       const map = new Map({
         basemap: mapDefaults.primaryBasemap,
         layers: [
-          requestLayer('watersheds'),
-          requestLayer('streams'),
-          requestLayer('gages'),
+          // TODO: consolodate into one function that takes array of layer names
+          // i.e. requestLayers(['watersheds', 'streams', 'gages'], store)
+          requestLayer('watersheds', store),
+          requestLayer('streams', store),
+          requestLayer('gages', store),
         ]
        })
 
@@ -57,7 +58,7 @@ const arcgisMiddleWare = store => next => (action) => {
 
       return arcgis.mapView
         .when(() => {
-          arcgis.mapView.layers.items.forEach((layer) => { layer.popupEnabled = false })
+          // arcgis.mapView.layers.items.forEach((layer) => { layer.popupEnabled = false })
 
           next({ ...action, status: 'loaded' })
 
@@ -84,6 +85,11 @@ const arcgisMiddleWare = store => next => (action) => {
           // const { selection } = store.getState();
           // updateHighlights(arcgis.sceneView, selection);
         });
+
+      default: {
+        next(action)
+        break
+      }
 
     }
 

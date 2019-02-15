@@ -1,15 +1,11 @@
 import { combineReducers } from 'redux-immutable'
 import { connectRouter } from 'connected-react-router/immutable'
-// import counterReducer from './counter'
-// import catReducer from './catFetcher'
-// import apiReducer from './api'
 import streamsReducer from './streams'
+import mapReducer from './map'
 
 
 const rootReducer = (history) => combineReducers({
-  // api: apiReducer,
-  // count: counterReducer,
-  // cat: catReducer,
+  map: mapReducer,
   streams: streamsReducer,
   router: connectRouter(history)
 })

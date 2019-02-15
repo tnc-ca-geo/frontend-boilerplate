@@ -1,24 +1,24 @@
-import {
-  selectionChange
-} from '../../actions/map';
+import { selectionChange } from '../../actions/map';
+import { getLayerURLs } from '../../selectors'
 
 
-
-
+const findLayerGroup = (selectedFeature, state) => {
+  const selectedURL = selectedFeature.sourceLayer.url
+  const layerURLs = getLayerURLs(state)
+  let layer = layerURLs.filter(url => url.get('url') === selectedURL)
+  return layer.get(0).get('layerGroup')
+}
 
 const registerSelectionWatcher = (view, store) =>
   view.popup.watch('selectedFeature', newValue => {
-    console.log('selected feature changed: ', newValue);
 
     if (!newValue || !newValue.sourceLayer) {
       store.dispatch(selectionChange(null, null))
       return
     }
 
-    // const layer = findLayer(newValue)
-    const layer = 'TODO - FIND LAYER'
-
-    store.dispatch(selectionChange(layer, newValue))
+    const layerGroup = findLayerGroup(newValue, store.getState())
+    store.dispatch(selectionChange(layerGroup, newValue))
 
   })
 

@@ -8,12 +8,14 @@ import history from './history'
 
 
 const configureStore = (preloadedState) => {
+  
   const composeEnhancer =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
   const store = createStore(
     rootReducer(history),
     preloadedState,
-    compose(
+    composeEnhancer(
       applyMiddleware(
         routerMiddleware(history),
         thunkMiddleware,
