@@ -7,7 +7,8 @@ import {
   INIT_MAP,
 } from '../actions/map'
 
-import requestLayer from './arcgis-mapview/requestLayers';
+import requestLayer from './arcgis-mapview/requestLayers'
+import registerSelectionWatcher from './arcgis-mapview/interaction'
 // import { updateHighlights } from './arcgis-sceneview/highlights';
 // import { setEnvironment } from './arcgis-sceneview/environment';
 
@@ -36,6 +37,9 @@ const arcgisMiddleWare = store => next => (action) => {
         center: mapDefaults.center,
         zoom: mapDefaults.zoom
       })
+
+      // TODO: register selected feature watcher on popup
+      registerSelectionWatcher(arcgis.mapView, store)
 
       // registerClickEvent(arcgis.mapView, store);
 

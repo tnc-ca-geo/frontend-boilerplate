@@ -4,5 +4,14 @@ export function initMap(container) {
     type: INIT_MAP,
     container,
     status,
-  };
+  }
+}
+
+export const SELECTION_CHANGE = 'SELECTION_CHANGE'
+export function selectionChange(layer, feature) {
+  return {
+    type: SELECTION_CHANGE,
+    layer,
+    feature,
+  }
 }
