@@ -1,4 +1,4 @@
-import esriConfig from 'esri/config'
+import { mapDefaults } from '../config/map'
 import Map from 'esri/Map'
 import MapView from 'esri/views/MapView'
 
@@ -7,36 +7,22 @@ import {
   INIT_MAP,
 } from '../actions/map'
 
-// import { registerClickEvent } from './arcgis-mapview/interaction';
+import requestLayer from './arcgis-mapview/requestLayers';
 // import { updateHighlights } from './arcgis-sceneview/highlights';
 // import { setEnvironment } from './arcgis-sceneview/environment';
 
 
 const arcgis = {};
-
 window.arcgis = arcgis;
 
-/**
- * Middleware function with the signature
- *
- * storeInstance =>
- * functionToCallWithAnActionThatWillSendItToTheNextMiddleware =>
- * actionThatDispatchWasCalledWith =>
- * valueToUseAsTheReturnValueOfTheDispatchCall
- *
- * Typically written as
- *
- * store => next => action => result
- */
 const arcgisMiddleWare = store => next => (action) => {
   switch (action.type) {
-    /**
-     * Initialize map view on a viewport container.
-     */
+
     case INIT_MAP:
       if (!action.container) break
 
-      // if mapview container is already initialized, just add it back to the DOM.
+      // if mapview container is already initialized
+      // just add it back to the DOM.
       if (arcgis.container) {
         action.container.appendChild(arcgis.container)
         break;
@@ -45,16 +31,26 @@ const arcgisMiddleWare = store => next => (action) => {
       // Otherwise, create a new container element and a new map view.
       arcgis.container = document.createElement('DIV')
       action.container.appendChild(arcgis.container)
-      arcgis.mapView = new MapView({ container: arcgis.container })
+      arcgis.mapView = new MapView({
+        container: arcgis.container,
+        center: mapDefaults.center,
+        zoom: mapDefaults.zoom
+      })
 
       // registerClickEvent(arcgis.mapView, store);
 
-      // Initialize Map
-      // const webScene = new WebScene({ portalItem: { id: action.id } });
-      const map = new Map({ basemap: 'topo'})
+      const map = new Map({
+        basemap: mapDefaults.primaryBasemap,
+        layers: [
+          requestLayer('watersheds'),
+          requestLayer('streams'),
+          requestLayer('gages'),
+        ]
+       })
+
       arcgis.mapView.map = map
 
-      // When initialized...
+
       return arcgis.mapView
         .when(() => {
           arcgis.mapView.layers.items.forEach((layer) => { layer.popupEnabled = false })

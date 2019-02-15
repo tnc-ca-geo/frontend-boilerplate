@@ -138,212 +138,193 @@ const GAGE_POPUP = {
   ]
 }
 
+export const NATURAL_FLOWS_API = 'https://flow-api.codefornature.org/v2/stream/'
 
-export default const mapConfig {
+export const GA_TRACKING_ID = 'UA-30758726-19'
 
-  layers: {
+export const layerConfig = {
 
-    //--------------------------------------------------------------------------
-    //  Streams
-    //--------------------------------------------------------------------------
+  streams: {
 
-    streams: {
-
-      sublayers: [
-        {
-          id: '01',
-          url: AGO_ROOT + 'nhdv2_display_1/FeatureServer',
-          type: 'featureLayer',
-          visible: true,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: STREAMS_POPUP,
-        },
-        {
-          id: '02',
-          url: AGO_ROOT + 'nhdv2_display_2/FeatureServer',
-          type: 'featureLayer',
-          visible: true,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: STREAMS_POPUP,
-        },
-        {
-          id: '03',
-          url: AGO_ROOT + 'nhdv2_display_3/FeatureServer',
-          type: 'featureLayer',
-          visible: true,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: STREAMS_POPUP,
-        },
-        {
-          id: '04',
-          url: AGO_ROOT + 'nhdv2_display_4/FeatureServer',
-          type: 'featureLayer',
-          visible: true,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: STREAMS_POPUP,
-        },
-      ],
-
-      groupLayer: {
-        id: '99',
-      	title: 'Streams',
-        order: 1,
-      	visible: true,
-      	visibilityMode: 'inherited',
-      	opacity: 1,
-      },
-
-      searchConfig: {
-        url: AGO_ROOT + 'nhdv2_display_4/FeatureServer',
-        searchFields: ['comid', 'gnis_name'],
-        exactMatch: true,
+    sublayers: [
+      {
+        id: '01',
+        url: AGO_ROOT + 'nhdv2_display_1/FeatureServer',
+        type: 'featureLayer',
+        visible: true,
+        opacity: 1,
         outFields: ['*'],
-        name: 'Stream segments',
-        placeholder: 'Search COMID or GNIS Name',
-        suggestionTemplate: 'COMID: {comid} ({gnis_name})',
         popupTemplate: STREAMS_POPUP,
       },
+      {
+        id: '02',
+        url: AGO_ROOT + 'nhdv2_display_2/FeatureServer',
+        type: 'featureLayer',
+        visible: true,
+        opacity: 1,
+        outFields: ['*'],
+        popupTemplate: STREAMS_POPUP,
+      },
+      {
+        id: '03',
+        url: AGO_ROOT + 'nhdv2_display_3/FeatureServer',
+        type: 'featureLayer',
+        visible: true,
+        opacity: 1,
+        outFields: ['*'],
+        popupTemplate: STREAMS_POPUP,
+      },
+      {
+        id: '04',
+        url: AGO_ROOT + 'nhdv2_display_4/FeatureServer',
+        type: 'featureLayer',
+        visible: true,
+        opacity: 1,
+        outFields: ['*'],
+        popupTemplate: STREAMS_POPUP,
+      },
+    ],
 
+    groupLayer: {
+      id: '99',
+    	title: 'Streams',
+      order: 1,
+    	visible: true,
+    	visibilityMode: 'inherited',
+    	opacity: 1,
     },
 
-    //--------------------------------------------------------------------------
-    //  Watersheds
-    //--------------------------------------------------------------------------
+    searchConfig: {
+      url: AGO_ROOT + 'nhdv2_display_4/FeatureServer',
+      searchFields: ['comid', 'gnis_name'],
+      exactMatch: true,
+      outFields: ['*'],
+      name: 'Stream segments',
+      placeholder: 'Search COMID or GNIS Name',
+      suggestionTemplate: 'COMID: {comid} ({gnis_name})',
+      popupTemplate: STREAMS_POPUP,
+    },
 
-    watersheds: {
+  },
 
-      sublayers: [
-        {
-          id: '05',
-          url: AGO_ROOT + 'hucs_12_ca/FeatureServer',
-          type: 'featureLayer',
-          visible: false,
-          opacity: 1,
-          outFields: ['*'],
-          popupEnabled: false,
-          popupTemplate: {
-            title: 'Subwatershed: {name}',
-            content: '<ul style="display: none">' +
-              '<li><strong>HUC_12: </strong> {huc}</li>' +
-              '<li id="segmentCount"></li></ul>',
-          },
+  watersheds: {
+
+    sublayers: [
+      {
+        id: '05',
+        url: AGO_ROOT + 'hucs_12_ca/FeatureServer',
+        type: 'featureLayer',
+        visible: false,
+        opacity: 1,
+        outFields: ['*'],
+        popupEnabled: false,
+        popupTemplate: {
+          title: 'Subwatershed: {name}',
+          content: '<ul style="display: none">' +
+            '<li><strong>HUC_12: </strong> {huc}</li>' +
+            '<li id="segmentCount"></li></ul>',
         },
-
-        {
-          id: '06',
-          url: AGO_ROOT + 'hucs_10_ca/FeatureServer',
-          type: 'featureLayer',
-          visible: true,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: WATERSHED_POPUP,
-        },
-
-        {
-          id: '07',
-          url: AGO_ROOT + 'hucs_8_ca/FeatureServer',
-          type: 'featureLayer',
-          visible: false,
-          opacity: 1,
-          outFields: ['*'],
-          popupTemplate: {
-            title: 'Subbasin: {name}',
-            content: '<ul style="display: none">' +
-              '<li><strong>HUC_08: </strong> {huc}</li>' +
-              '<li id="segmentCount"></li></ul>',
-          },
-        },
-      ],
-
-      groupLayer: {
-        id: '98',
-      	title: 'Watersheds',
-        order: 2,
-      	visible: false,
-      	visibilityMode: 'independent',
-      	opacity: 1,
       },
 
-      searchConfig: {
+      {
+        id: '06',
         url: AGO_ROOT + 'hucs_10_ca/FeatureServer',
-        searchFields: ['name'],
-        exactMatch: true,
+        type: 'featureLayer',
+        visible: true,
+        opacity: 1,
         outFields: ['*'],
-        name: 'Watersheds',
-        placeholder: 'Search watersheds',
-        suggestionTemplate: '{name}',
         popupTemplate: WATERSHED_POPUP,
       },
 
-    },
-
-    //--------------------------------------------------------------------------
-    //  Gages
-    //--------------------------------------------------------------------------
-
-    gages: {
-
-      id: '07',
-      title: 'Gages',
-      url: AGO_ROOT + 'gauges/FeatureServer',
-      visibile: true,
-      opacity: 1,
-      outFields: ['*'],
-      popupTemplate: GAGE_POPUP,
-      searchConfig: {
-        url: AGO_ROOT + 'gauges/FeatureServer',
-        searchFields: ['name'],
-        exactMatch: true,
+      {
+        id: '07',
+        url: AGO_ROOT + 'hucs_8_ca/FeatureServer',
+        type: 'featureLayer',
+        visible: false,
+        opacity: 1,
         outFields: ['*'],
-        name: 'Gages',
-        placeholder: 'Search for Gages',
-        suggestionTemplate: 'Gage: {name}',
-        popupTemplate: GAGE_POPUP,
+        popupTemplate: {
+          title: 'Subbasin: {name}',
+          content: '<ul style="display: none">' +
+            '<li><strong>HUC_08: </strong> {huc}</li>' +
+            '<li id="segmentCount"></li></ul>',
+        },
       },
+    ],
+
+    groupLayer: {
+      id: '98',
+    	title: 'Watersheds',
+      order: 2,
+    	visible: false,
+    	visibilityMode: 'independent',
+    	opacity: 1,
+    },
+
+    searchConfig: {
+      url: AGO_ROOT + 'hucs_10_ca/FeatureServer',
+      searchFields: ['name'],
+      exactMatch: true,
+      outFields: ['*'],
+      name: 'Watersheds',
+      placeholder: 'Search watersheds',
+      suggestionTemplate: '{name}',
+      popupTemplate: WATERSHED_POPUP,
     },
 
   },
 
-  defaults: {
-    primaryBasemap: 'topo-vector',
-    secondaryBasemap: 'satellite',
-    center: [-121, 38],
-    zoom: 7,
-    camera: {
-      position: { // autocasts as new Point()
-        x: -120.3405266104523,
-        y: 37.570069924445725,
-        z: 20160.882327826694,
-      },
-      heading: 0.748516866949802,
-      tilt: 62.95536300536367,
-    },
-    elevationExageration: 3,
-    constraints: {
-      rotationEnabled: false
-    },
-    popupOptions: {
-      actions: [],
-      dockEnabled: false,
-      collapseEnabled: false,
-      featureNavigationEnabled: false,
-      dockOptions: {
-        buttonEnabled: false,
-        breakpoint: false,
-        position: 'bottom-center',
-      },
-    }
-  },
+  gages: {
 
-  additionalServices: {
-    printService: 'http://nyadkspatial.tnc.org/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task',
-    naturalFlowsAPIv2: 'https://flow-api.codefornature.org/v2/stream/',
-  },
+    id: '07',
+    title: 'Gages',
+    url: AGO_ROOT + 'gauges/FeatureServer',
+    visibile: true,
+    opacity: 1,
+    outFields: ['*'],
+    popupTemplate: GAGE_POPUP,
+    searchConfig: {
+      url: AGO_ROOT + 'gauges/FeatureServer',
+      searchFields: ['name'],
+      exactMatch: true,
+      outFields: ['*'],
+      name: 'Gages',
+      placeholder: 'Search for Gages',
+      suggestionTemplate: 'Gage: {name}',
+      popupTemplate: GAGE_POPUP,
+    },
+  }
+}
 
-  gaTrackingId: 'UA-30758726-19',
+export const mapDefaults = {
+
+  primaryBasemap: 'topo-vector',
+  secondaryBasemap: 'satellite',
+  center: [-121, 38],
+  zoom: 7,
+  camera: {
+    position: { // autocasts as new Point()
+      x: -120.3405266104523,
+      y: 37.570069924445725,
+      z: 20160.882327826694,
+    },
+    heading: 0.748516866949802,
+    tilt: 62.95536300536367,
+  },
+  elevationExageration: 3,
+  constraints: {
+    rotationEnabled: false
+  },
+  popupOptions: {
+    actions: [],
+    dockEnabled: false,
+    collapseEnabled: false,
+    featureNavigationEnabled: false,
+    dockOptions: {
+      buttonEnabled: false,
+      breakpoint: false,
+      position: 'bottom-center',
+    },
+  }
 
 }

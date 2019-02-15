@@ -5,9 +5,7 @@ import PropTypes from 'prop-types'
 class Map extends React.Component {
 
   componentDidMount() {
-
     this.props.initMap(this.mapView)
-
   }
 
 
