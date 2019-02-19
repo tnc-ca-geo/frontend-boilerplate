@@ -7,7 +7,7 @@ import {
 } from '../actions/map'
 
 import requestLayer from './arcgis-mapview/requestLayers'
-import registerSelectionWatcher from './arcgis-mapview/interaction'
+import registerClickEvent from './arcgis-mapview/interaction'
 // import { updateHighlights } from './arcgis-sceneview/highlights';
 // import { setEnvironment } from './arcgis-sceneview/environment';
 
@@ -29,7 +29,7 @@ const arcgisMiddleWare = store => next => (action) => {
       }
 
       // Otherwise, create a new container element and a new map view.
-      arcgis.container = document.createElement('DIV')
+      arcgis.container = document.createElement('div')
       action.container.appendChild(arcgis.container)
       arcgis.mapView = new MapView({
         container: arcgis.container,
@@ -37,10 +37,8 @@ const arcgisMiddleWare = store => next => (action) => {
         zoom: mapDefaults.zoom
       })
 
-      // TODO: register selected feature watcher on popup
-      registerSelectionWatcher(arcgis.mapView, store)
-
-      // registerClickEvent(arcgis.mapView, store);
+      // Register selected feature watcher on popup
+      registerClickEvent(arcgis.mapView, store)
 
       const map = new Map({
         basemap: mapDefaults.primaryBasemap,
@@ -59,6 +57,8 @@ const arcgisMiddleWare = store => next => (action) => {
       return arcgis.mapView
         .when(() => {
           // arcgis.mapView.layers.items.forEach((layer) => { layer.popupEnabled = false })
+
+          arcgis.mapView.popup.autoOpenEnabled = false
 
           next({ ...action, status: 'loaded' })
 

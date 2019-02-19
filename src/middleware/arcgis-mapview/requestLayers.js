@@ -6,8 +6,8 @@ import { layerDidLoad } from '../../actions/map'
 
 // TODO: allow for fetching other layer types (MapImageLayer, etc)
 
-const requestFeatureLayer = (layerGroup, layerConfig) =>
-  new FeatureLayer({
+const requestFeatureLayer = (layerGroup, layerConfig, store) => {
+  const newLayer = new FeatureLayer({
     url: layerConfig.url,
     title: layerGroup,
     visible: layerConfig.visible,
@@ -15,6 +15,21 @@ const requestFeatureLayer = (layerGroup, layerConfig) =>
     outFields: layerConfig.outFields,
     popupTemplate: layerConfig.popupTemplate,
   })
+
+  newLayer.when(function(result) {
+    // TODO: reiplment display levels for goTo search functionality.
+    // if (layerGroup === 'streams') {
+    //   app.displayLevels[index + 1] = result.minScale;
+    // };
+    store.dispatch(layerDidLoad(result))
+
+  }, function(error) {
+    console.log('Error loading ' + layerGroup + ' layers')
+  })
+
+
+  return newLayer
+}
 
 
 const requestLayer = (layerGroup, store) => {
@@ -24,19 +39,7 @@ const requestLayer = (layerGroup, store) => {
   if (config.sublayers) {
 
     const sublayers = config.sublayers.map(function(sublayer, index) {
-      const newLayer = requestFeatureLayer(layerGroup, sublayer)
-      newLayer.when(function(result) {
-        // TODO: reiplment display levels for goTo search functionality.
-        // if (layerGroup === 'streams') {
-        //   app.displayLevels[index + 1] = result.minScale;
-        // };
-
-        store.dispatch(layerDidLoad(result))
-
-      }, function(error) {
-        console.log('Error loading ' + layerGroup + ' layers')
-      })
-      return newLayer
+      return requestFeatureLayer(layerGroup, sublayer, store)
     })
 
     const groupLayer = new GroupLayer({
@@ -51,7 +54,7 @@ const requestLayer = (layerGroup, store) => {
 
   } else {
 
-    return requestFeatureLayer(layerGroup, config)
+    return requestFeatureLayer(layerGroup, config, store)
 
   }
 
