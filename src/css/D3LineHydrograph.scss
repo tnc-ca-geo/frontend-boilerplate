@@ -1,0 +1,94 @@
+// TODO: explore using CSS Modules w/ SASS
+// https://blog.bitsrc.io/how-to-use-sass-and-css-modules-with-create-react-app-83fa8b805e5e
+
+$font-stack: Calibri, Helvetica, Arial, sans-serif;
+$primary-black-color: #333;
+$primary-grey-color: #A1A1A1;
+$medium-grey-color: #EFEFEF;
+$light-grey-color: #F9F9F9;
+
+$estimated-low-color: #85C1E9;
+$estimated-all-color: #2E86C1;
+$estimated-high-color: #1B4F72;
+$observed-all-color: #A3288E;
+
+.domain,
+.tick line {
+  fill: none;
+  stroke: $primary-grey-color;
+  stroke-width: 0.5;
+  opacity: 0.5;
+}
+
+text {
+  fill: $primary-grey-color;
+  font: 12px $font-stack;
+}
+
+.path {
+  .line {
+    fill: none;
+    stroke-width: 2;
+  }
+  .points {
+    stroke-width: 2;
+    stroke: #ffffff;
+    &.focused {
+      stroke-width: 2;
+      stroke-opacity: 1;
+    }
+  }
+  .confidence-interval {
+    fill-opacity: 0.20;
+    fill: $primary-grey-color;
+  }
+
+  &.observedAll {
+    .line { stroke: $observed-all-color; }
+    .points {
+      fill: $observed-all-color;
+      &.focused {
+        fill: #ffffff;
+        stroke: $observed-all-color;
+      }
+    }
+  }
+
+  &.estimatedLow {
+    .line { stroke: $estimated-low-color; }
+    .points {
+      fill: $estimated-low-color;
+      &.focused {
+        fill: #ffffff;
+        stroke: $estimated-low-color;
+      }
+    }
+  }
+
+  &.estimatedAll {
+    .line { stroke: $estimated-all-color; }
+    .points {
+      fill: $estimated-all-color;
+      &.focused {
+        fill: #ffffff;
+        stroke: $estimated-all-color;
+      }
+    }
+  }
+
+  &.estimatedHigh {
+    .line { stroke: $estimated-high-color; }
+    .points {
+      fill: $estimated-high-color;
+      &.focused {
+        fill: #ffffff;
+        stroke: $estimated-high-color;
+      }
+    }
+  }
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}

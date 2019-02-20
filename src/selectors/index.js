@@ -29,6 +29,9 @@ export const getStreamAttributes = createSelector(
 // Streams slice
 //------------------------------------------------------------------------------
 
+export const getComid = state =>
+  state.getIn(['streams', 'comid'])
+
 export const getFlowData = state =>
   state.getIn(['streams', 'data'])
 

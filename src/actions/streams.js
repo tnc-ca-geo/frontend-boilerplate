@@ -1,4 +1,3 @@
-// import fetch from 'cross-fetch'
 import { csv } from 'd3'
 // import { normalize } from 'normalizr'
 import { fromJS } from 'immutable'
@@ -43,6 +42,7 @@ export function loadStreamFailure() {
 }
 
 const DEFAULT_QUERY = { statistics: 'mean' }
+
 function buildURL(queryParams) {
   let url = new URL(NATURAL_FLOWS_API)
   const query = { ...DEFAULT_QUERY, ...queryParams }
