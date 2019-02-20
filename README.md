@@ -10,6 +10,8 @@ For bootstrapping apps with:
 
 The boilerplate leverages Redux middleware to encapsulate all interactions with the ESRI JS API. Here's a [blog post](https://www.esri.com/arcgis-blog/products/3d-gis/3d-gis/react-redux-building-modern-web-apps-with-the-arcgis-js-api/) and [sample app](https://github.com/Esri/react-redux-js4) that describes that approach.
 
+The integration with D3 follows the "Lifecycles Method Wrapping" approach outlined [here](https://www.smashingmagazine.com/2018/02/react-d3-ecosystem/).
+
 
 # Getting started
 
