@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import StreamPopup from '../../containers/StreamPopup'
 import { selectionChange } from '../../actions/map'
+import { fetchFlowData } from '../../actions/streams'
 import { Provider } from 'react-redux'
 import { store } from '../../index'
 // import { getLayerURLs } from '../../selectors'
@@ -31,12 +32,16 @@ const handleClick = (response, view, store) => {
 
     const feature = graphic[0].graphic
     const layerGroup = feature.layer.title
+    const comid = feature.attributes.comid
+
     store.dispatch(selectionChange(layerGroup, feature))
+    store.dispatch(fetchFlowData({ comids: comid }))
 
     view.popup.open({
-      title: 'Stream',
+      title: 'COMID: ' + comid,
       location: graphic[0].mapPoint,
-      content: addPopup()
+      content: addPopup(),
+      actions: []
     })
 
   } else {

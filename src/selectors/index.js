@@ -24,3 +24,29 @@ export const getStreamAttributes = createSelector(
     }
   }
 )
+
+//------------------------------------------------------------------------------
+// Streams slice
+//------------------------------------------------------------------------------
+
+export const getFlowData = state =>
+  state.getIn(['streams', 'data'])
+
+export const getFlowDataArray = createSelector(
+  [getFlowData],
+  (data) => {
+    if (data && data.size) {
+      // trying to avoid using .toJS(), but not sure if this is any more efficient
+      return data.toArray().map(d => d.toObject())
+    }
+  }
+)
+
+export const getHoveredMetric = state =>
+  state.getIn(['streams', 'hoveredMetric'])
+
+export const getHoveredMonth = state =>
+  state.getIn(['streams', 'hoveredMonth'])
+
+export const getHoveredMonthData = state =>
+  state.getIn(['streams', 'hoveredMonthData'])

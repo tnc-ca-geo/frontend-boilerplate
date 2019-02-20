@@ -2,6 +2,7 @@
 import { csv } from 'd3'
 // import { normalize } from 'normalizr'
 import { fromJS } from 'immutable'
+import { NATURAL_FLOWS_API } from '../config/data'
 // import breedsListSchema from '../schemas/breed'
 
 export const CHART_HOVERED = 'CHART_HOVERED'
@@ -41,10 +42,9 @@ export function loadStreamFailure() {
   }
 }
 
-const API_ROOT = 'https://flow-api.codefornature.org/v2/stream/'
 const DEFAULT_QUERY = { statistics: 'mean' }
 function buildURL(queryParams) {
-  let url = new URL(API_ROOT)
+  let url = new URL(NATURAL_FLOWS_API)
   const query = { ...DEFAULT_QUERY, ...queryParams }
   Object.keys(query).forEach(key =>
     url.searchParams.append(key, query[key])
@@ -52,7 +52,7 @@ function buildURL(queryParams) {
   return url
 }
 
-export function fetchStream(queryParams) {
+export function fetchFlowData(queryParams) {
   return function(dispatch, getState) {
 
     dispatch(loadStreamRequest())
