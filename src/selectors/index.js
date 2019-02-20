@@ -15,13 +15,12 @@ export const getLayerURLs = state =>
 export const getSelectedFeature = state =>
   state.getIn(['map', 'selectedFeature'])
 
-export const getComid = createSelector(
+export const getStreamAttributes = createSelector(
   [getSelectedFeature],
   (feature) => {
-    console.log('getting comid');
-    if (feature.layerGroup === 'streams') {
-      console.log('feature: ', feature)
-      return feature
+    if (feature.getIn(['layerGroup']) === 'streams') {
+      const attributes = feature.getIn(['feature', 'attributes'])
+      return attributes
     }
   }
 )

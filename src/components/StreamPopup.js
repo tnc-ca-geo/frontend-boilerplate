@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const StreamPopup = () => (
+const StreamPopup = ({ streamAttributes }) => (
   <div>
-    Stream popup
+    Stream popup for comid: {streamAttributes.comid}
   </div>
 )
 
 StreamPopup.propTypes = {
-  comid: PropTypes.string
+  streamAttributes: PropTypes.object
 }
 
 export default StreamPopup

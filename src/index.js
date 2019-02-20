@@ -12,7 +12,7 @@ import rootReducer from './reducers'
 import history from './history'
 import configureStore from './configureStore'
 
-const store = configureStore()
+export const store = configureStore()
 
 
 const render = () => ReactDOM.render(

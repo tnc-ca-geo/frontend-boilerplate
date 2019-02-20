@@ -1,16 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StreamPopup from '../../components/StreamPopup'
-import { selectionChange } from '../../actions/map';
+import StreamPopup from '../../containers/StreamPopup'
+import { selectionChange } from '../../actions/map'
+import { Provider } from 'react-redux'
+import { store } from '../../index'
 // import { getLayerURLs } from '../../selectors'
-
 // TODO: no longer need to store and check slelections against layer URLs,
 // so remove from reducer/actions/selectors
 
-
+// Not sure this is the cleanest approach. Feels hacky...
 const addPopup = () => {
   let popupNode = document.createElement('div')
-  ReactDOM.render(<StreamPopup />, popupNode)
+  ReactDOM.render(
+    <Provider store={ store }>
+      <StreamPopup />
+    </Provider>,
+    popupNode
+  )
   return popupNode
 }
 
@@ -37,6 +43,7 @@ const handleClick = (response, view, store) => {
 
     store.dispatch(selectionChange(null, null))
     view.popup.close()
+    // TODO: do I need to destroy the StreamPopup component?
 
   }
 
