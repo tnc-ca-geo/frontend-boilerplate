@@ -4,6 +4,12 @@
 // and allowing you to control their flow with next(action),
 // modify the actions before passing them along, and dispatch other actions
 
+// Great intro to redux middleware here:
+// https://www.codementor.io/vkarpov/beginner-s-guide-to-redux-middleware-du107uyud
+
+// More complex example of a middleware that interacts with an API:
+// https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/real-world
+
 export default store => next => action => {
 
   // do something with the action
@@ -18,9 +24,3 @@ export default store => next => action => {
   return next(action)
 
 }
-
-// Great intro to redux middleware here:
-// https://www.codementor.io/vkarpov/beginner-s-guide-to-redux-middleware-du107uyud
-
-// More complex example of a middleware that interacts with an API:
-// https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/real-world

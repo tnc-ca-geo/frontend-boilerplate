@@ -1,5 +1,4 @@
 import { Map } from 'immutable'
-
 import {
   LOAD_STREAM_REQUEST,
   LOAD_STREAM_SUCCESS,
@@ -10,17 +9,16 @@ import {
 // TODO: make sure we're not using anti-patterns
 // https://tech.affirm.com/redux-patterns-and-anti-patterns-7d80ef3d53bc
 
-const streamsReducer = (
-  state = Map({
-    isFetching: null,
-    comid: null,
-    data: null,
-    hoveredMetric: null,
-    hoveredMonth: null,
-    hoveredMonthData: null,
-  }),
-  action
-) => {
+const initialState =  Map({
+  isFetching: null,
+  comid: null,
+  data: null,
+  hoveredMetric: null,
+  hoveredMonth: null,
+  hoveredMonthData: null,
+})
+
+const streamsReducer = (state = initialState,  action) => {
   switch (action.type) {
 
     case CHART_HOVERED:
@@ -29,6 +27,7 @@ const streamsReducer = (
         s.set('hoveredMonth', action.hoveredMonth)
         s.set('hoveredMonthData', action.hoveredMonthData)
       })
+
     case LOAD_STREAM_REQUEST:
       return state.set('isFetching', action.isFetching)
 
@@ -41,7 +40,7 @@ const streamsReducer = (
       })
 
     case LOAD_STREAM_FAILURE:
-      return state.set('isFetchingCOMID', action.isFetching)
+      return state.set('isFetching', action.isFetching)
 
     default:
       return state

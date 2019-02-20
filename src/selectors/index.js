@@ -18,6 +18,7 @@ export const getSelectedFeature = state =>
 export const getStreamAttributes = createSelector(
   [getSelectedFeature],
   (feature) => {
+    console.log('selected feature: ', feature);
     if (feature.getIn(['layerGroup']) === 'streams') {
       const attributes = feature.getIn(['feature', 'attributes'])
       return attributes

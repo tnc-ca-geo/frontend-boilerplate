@@ -6,26 +6,26 @@ import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 
 
 const NavBar = () => (
-  <Navbar bg="light" variant="light">
-    <IndexLinkContainer to="/">
+  <Navbar bg='light' variant='light'>
+    <IndexLinkContainer to='/'>
       <Navbar.Brand>
         <img
-          alt=""
+          alt=''
           src={logo}
-          width="110"
-          className="d-inline-block align-top"
+          width='110'
+          className='d-inline-block align-top'
         />
         {'  Boilerplate'}
       </Navbar.Brand>
     </IndexLinkContainer>
-    <Nav className="justify-content-end">
-      <LinkContainer to="/science">
+    <Nav className='justify-content-end'>
+      <LinkContainer to='/science'>
         <Nav.Link>Science</Nav.Link>
       </LinkContainer>
-      <LinkContainer to="/map">
+      <LinkContainer to='/map'>
         <Nav.Link>Map</Nav.Link>
       </LinkContainer>
-      <LinkContainer to="/api">
+      <LinkContainer to='/api'>
         <Nav.Link>API</Nav.Link>
       </LinkContainer>
     </Nav>

@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     case LAYER_DID_LOAD:
       const layer = Map({
         layerGroup: action.layerGroup,
-        url: action.url 
+        url: action.url
       })
       const urls = state.getIn(['layerURLs']).push(layer)
       return state.set('layerURLs', urls)
@@ -32,6 +32,7 @@ export default (state = initialState, action) => {
         layerGroup: action.layerGroup,
         feature: action.feature
       })
+      console.log('reducing SELECTION_CHANGE: ', feature);
       return state.set('selectedFeature', feature)
 
     default:

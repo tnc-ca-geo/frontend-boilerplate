@@ -1,8 +1,12 @@
 import { csv } from 'd3'
-// import { normalize } from 'normalizr'
 import { fromJS } from 'immutable'
-import { NATURAL_FLOWS_API } from '../config/data'
+import {
+  NATURAL_FLOWS_API,
+  DEFAULT_QUERY
+} from '../config/data'
+// import { normalize } from 'normalizr'
 // import breedsListSchema from '../schemas/breed'
+
 
 export const CHART_HOVERED = 'CHART_HOVERED'
 export function chartHovered(closestMonthData, closestMetric) {
@@ -14,6 +18,7 @@ export function chartHovered(closestMonthData, closestMetric) {
   }
 }
 
+
 export const LOAD_STREAM_REQUEST = 'LOAD_STREAM_REQUEST'
 export function loadStreamRequest() {
   return {
@@ -21,6 +26,7 @@ export function loadStreamRequest() {
     isFetching: true,
   }
 }
+
 
 export const LOAD_STREAM_SUCCESS = 'LOAD_STREAM_SUCCESS'
 export function loadStreamSuccess(comid, data) {
@@ -33,6 +39,7 @@ export function loadStreamSuccess(comid, data) {
   }
 }
 
+
 export const LOAD_STREAM_FAILURE = 'LOAD_STREAM_FAILURE'
 export function loadStreamFailure() {
   return {
@@ -41,7 +48,6 @@ export function loadStreamFailure() {
   }
 }
 
-const DEFAULT_QUERY = { statistics: 'mean' }
 
 function buildURL(queryParams) {
   let url = new URL(NATURAL_FLOWS_API)
@@ -51,6 +57,10 @@ function buildURL(queryParams) {
   )
   return url
 }
+
+// TODO: save all loaded flow data after loading in fetchFlowData()
+// and create a new action that checks store to see if we already have
+// the data for that COMID before fetching it
 
 export function fetchFlowData(queryParams) {
   return function(dispatch, getState) {

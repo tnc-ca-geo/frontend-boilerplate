@@ -27,7 +27,6 @@ const requestFeatureLayer = (layerGroup, layerConfig, store) => {
     console.log('Error loading ' + layerGroup + ' layers')
   })
 
-
   return newLayer
 }
 
@@ -36,28 +35,29 @@ const requestLayer = (layerGroup, store) => {
 
   const config = layerConfig[layerGroup]
 
-  if (config.sublayers) {
-
-    const sublayers = config.sublayers.map(function(sublayer, index) {
-      return requestFeatureLayer(layerGroup, sublayer, store)
-    })
-
-    const groupLayer = new GroupLayer({
-      title: config.groupLayer.title,
-    	visible: config.groupLayer.visible,
-    	visibilityMode: config.groupLayer.visibilityMode,
-    	opacity: config.groupLayer.opacity,
-      layers: sublayers,
-    })
-
-    return groupLayer
-
-  } else {
-
+  if (!config.sublayers) {
     return requestFeatureLayer(layerGroup, config, store)
-
   }
+
+  const sublayers = config.sublayers.map(function(sublayer, index) {
+    return requestFeatureLayer(layerGroup, sublayer, store)
+  })
+
+  const groupLayer = new GroupLayer({
+    title: config.groupLayer.title,
+  	visible: config.groupLayer.visible,
+  	visibilityMode: config.groupLayer.visibilityMode,
+  	opacity: config.groupLayer.opacity,
+    layers: sublayers,
+  })
+
+  return groupLayer
 
 }
 
-export default requestLayer
+
+const requestLayers = (layerGroups, store) => {
+  return layerGroups.map(layerGroup => requestLayer(layerGroup, store))
+}
+
+export default requestLayers

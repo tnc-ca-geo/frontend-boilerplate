@@ -17,10 +17,11 @@ export function layerDidLoad(layer) {
 }
 
 export const SELECTION_CHANGE = 'SELECTION_CHANGE'
-export function selectionChange(layerGroup, feature) {
+export function selectionChange(layerGroup, feature, mapPoint) {
   return {
     type: SELECTION_CHANGE,
     layerGroup,
     feature,
+    mapPoint
   }
 }

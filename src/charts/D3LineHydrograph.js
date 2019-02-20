@@ -27,6 +27,8 @@ D3LineHydrograph.update = (el, props, chart) => {
 
   const { data, config, hoveredMonth, hoveredMetric, chartHovered } = props
 
+  if (!data) { return }
+
   // Scales and functions
 
   const margin = config.margins
@@ -81,7 +83,7 @@ D3LineHydrograph.update = (el, props, chart) => {
   let metric = chart.selectAll('.path')
     .data(data)
     .enter().append('g')
-      .attr('class', d => 'path ' + d.name );
+      .attr('class', d => 'path ' + d.name )
 
   metric.append('path')
     .attr('d', d => {
