@@ -23,6 +23,7 @@ class LineHydrograph extends React.Component {
     if (!nextProps.hoveredMetric || !nextProps.hoveredMonth) { return true }
     if (nextProps.hoveredMetric !== this.props.hoveredMetric ||
         nextProps.hoveredMonth.getTime() !== this.props.hoveredMonth.getTime()) {
+      console.log('redrawing');
       return true
     }
     return false

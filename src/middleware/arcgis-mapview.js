@@ -11,8 +11,8 @@ import registerClickEvent from './arcgis-mapview/interaction'
 import buildPopup from './arcgis-mapview/popup'
 
 
-const arcgis = {};
-window.arcgis = arcgis;
+const arcgis = {}
+window.arcgis = arcgis
 
 
 const arcgisMiddleWare = store => next => (action) => {
